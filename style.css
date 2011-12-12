@@ -1,0 +1,42 @@
+/**
+ * MMM Revelstoke Weather
+ * Version: 1.0
+ */
+
+div#mmm-date {
+	font-size: 0.7em;
+}
+div#mmm-weather-icon {
+	float: left;
+}
+div#mmm-temperature {
+	float: right;
+	font-size: 3.5em;
+	margin-top: 40px;
+	margin-right: 20px;
+	text-align: right;
+}
+div#mmm-sky {
+	float: right;
+	text-align: right;
+	margin-right: 20px;
+	margin-top: -20px;
+}
+div#mmm-more {
+	cursor: pointer;
+}
+div#mmm-forecast {
+	display: none;
+	padding-top: 15px;
+}
+div#mmm-forecast h3 {
+	font-size: .95em;
+	margin-bottom: 3px;
+}
+.mmm-forecast-icon {
+	width: 57px;
+	height: auto;
+}
+div#mmm-forecast p {
+	font-size: .95em;
+}
