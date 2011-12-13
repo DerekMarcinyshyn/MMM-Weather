@@ -7,7 +7,7 @@
 /*
 Plugin Name: MMM Weather
 Plugin URI: http://monasheemountainmultimedia.com
-Description: Revelstoke Weather Widget live feed from Environment Canada
+Description: Weather Widget live feed from Environment Canada
 Author: Derek Marcinyshyn
 Version: 1.0.0
 Author URI: http://monasheemountainmultimedia.com
@@ -70,7 +70,7 @@ defined("DS") or define("DS", DIRECTORY_SEPARATOR);
 
 include_once( 'updater.php' );
 
-if (is_admin()) { // note the use of is_admin() to double check that this is happening in the admin
+if ( is_admin() ) { // note the use of is_admin() to double check that this is happening in the admin
 	$config = array(
 			'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
 			'proper_folder_name' => 'mmm-weather', // this is the name of the folder your plugin lives in
@@ -81,7 +81,7 @@ if (is_admin()) { // note the use of is_admin() to double check that this is hap
 			'requires' => '3.0', // which version of WordPress does your plugin require?
 			'tested' => '3.3', // which version of WordPress is your plugin tested up to?
 	);
-	new wp_github_updater($config);
+	new wp_github_updater( $config );
 }
 
 /*
