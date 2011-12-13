@@ -2,7 +2,7 @@
 /**
 * @package Wordpress
 * @subpackage Widgets
-* @version 0.1
+* @version 0.1.1
 */
 /*
 Plugin Name: MMM Weather
@@ -41,6 +41,54 @@ defined("DS") or define("DS", DIRECTORY_SEPARATOR);
  * directly, the entire system will be based on these actions and hooks.
  */
 
+/**
+ * WordPress GitHub Plugin Updater
+ * @author Joachim Kudish <info@jkudish.com>
+ * @link http://jkudish.com
+ * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
+ * @copyright Copyright (c) 2011, Joachim Kudish
+ *
+ * GNU General Public License, Free Software Foundation 
+ *	<http://creativecommons.org/licenses/GPL/2.0/>
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *  
+ * 
+ */
+
+include_once( 'updater.php' );
+
+if (is_admin()) { // note the use of is_admin() to double check that this is happening in the admin
+	$config = array(
+			'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
+			'proper_folder_name' => 'mmm-weather', // this is the name of the folder your plugin lives in
+			'api_url' => 'https://api.github.com/repos/DerekMarcinyshyn/MMM-Weather', // the github API url of your github repo
+			'raw_url' => 'https://raw.github.com/DerekMarcinyshyn/MMM-Weather', // the github raw url of your github repo
+			'github_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather', // the github url of your github repo
+			'zip_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/zipball/master', // the zip url of the github repo
+			'requires' => '3.0', // which version of WordPress does your plugin require?
+			'tested' => '3.3', // which version of WordPress is your plugin tested up to?
+	);
+	new wp_github_updater($config);
+}
+
+/*
+ * End of GitHub Plugin Updater
+ */
+
+
 add_action( 'widgets_init', create_function( '', 'register_widget("Revelstoke_Weather");' ) );
 
 //load css files
@@ -60,7 +108,7 @@ function add_mmm_weather_jscripts() {
 	$wx_scripts_url = plugins_url( 'scripts.js', __FILE__ );
 	$wx_scripts_file = WP_PLUGIN_DIR . '/mmm-weather/scripts.js';
 	if ( file_exists( $wx_scripts_file ) ) {
-		wp_register_script( 'mmm-weather-jscripts', $wx_scripts_url );
+		wp_register_script( 'mmm-weather-jscripts', $wx_scripts_url, 'jquery', '1.0', true );
 		wp_enqueue_script( 'mmm-weather-jscripts' );
 	}
 }
