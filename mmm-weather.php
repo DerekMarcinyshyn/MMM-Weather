@@ -2,14 +2,14 @@
 /**
 * @package Wordpress
 * @subpackage Widgets
-* @version 0.1.1
+* @version 1.0.0
 */
 /*
 Plugin Name: MMM Weather
 Plugin URI: http://monasheemountainmultimedia.com
 Description: Revelstoke Weather Widget live feed from Environment Canada
 Author: Derek Marcinyshyn
-Version: 0.1
+Version: 1.0.0
 Author URI: http://monasheemountainmultimedia.com
 
 
@@ -181,7 +181,7 @@ function widget($args, $instance)
 	$wx_html .= '<div id="mmm-forecast">';
 	
 	// $forecastNode = $weather->xpath( 'forecastGroup/forecast' );
-	// $forecastCount = count( $forecastNode );
+	// $forecastCount = count( $forecastNode ); //max number of forecast periods
 	
 	// loop through forecasts
 	for ( $i = 0; $i < 3; $i++) {
