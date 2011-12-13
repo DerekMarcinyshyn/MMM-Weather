@@ -17,30 +17,22 @@ A custom sidebar weather widget for Revelstoke, BC that reads from the Environme
 
 == Installation ==
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
+1. Upload `mmm-weather.zip` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Drag the widget to your sidebar.
+
 
 == Frequently Asked Questions ==
 
 
-= A question that someone might have =
-
-An answer to that question.
-
-= What about other towns? =
-
-Coming soon.
-
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
-2. This is the second screen shot
+No screenshot.
+
 
 == Changelog ==
 
-= 1.0.1 =
+= 1.0.1
 Code cleanup.
 
 = 1.0.0 =
@@ -51,4 +43,3 @@ Initial release.
 
 = 1.0.0 =
 Initial build
-
