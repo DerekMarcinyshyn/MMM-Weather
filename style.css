@@ -25,6 +25,9 @@ div#mmm-sky {
 div#mmm-more {
 	cursor: pointer;
 }
+div#mmm-more:hover {
+	opacity: 0.8;
+}
 div#mmm-forecast {
 	display: none;
 	padding-top: 15px;

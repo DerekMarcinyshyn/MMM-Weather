@@ -37,8 +37,8 @@ class wp_github_updater {
 			'slug' => plugin_basename(__FILE__),
 			'proper_folder_name' => plugin_basename(__FILE__),
 			'api_url' => 'https://api.github.com/repos/DerekMarcinyshyn/MMM-Weather',
-			'raw_url' => 'https://raw.github.com/DerekMarcinyshyn/MMM-Weather/master',
-			'github_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather',
+			'raw_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/blob/master',
+			'github_url' => 'https://DerekMarcinyshyn@github.com/DerekMarcinyshyn/MMM-Weather.git',
 			'zip_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/zipball/master',
 		  'requires' => $wp_version,
 	    'tested' => $wp_version,
@@ -89,7 +89,7 @@ class wp_github_updater {
 		$version = get_site_transient($this->config['slug'].'_new_version');
 		if (!isset($version) || !$version || $version == '') {
 
-			$raw_response = wp_remote_get($this->config['raw_url'].'/README.md');
+			$raw_response = wp_remote_get($this->config['raw_url'].'/readme.txt');
 
 			if (is_wp_error($raw_response))
 				return false;
