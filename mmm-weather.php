@@ -84,6 +84,12 @@ if ( is_admin() ) { // note the use of is_admin() to double check that this is h
 	new wp_github_updater( $config );
 }
 
+add_action('http_request_args', 'jkudish_http_request_args', 10, 2);
+function jkudish_http_request_args($args, $url) {
+	$args['sslverify'] = false;
+	return $args;
+}
+
 /*
  * End of GitHub Plugin Updater
  */
