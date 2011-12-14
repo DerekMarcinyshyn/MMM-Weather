@@ -75,8 +75,8 @@ if ( is_admin() ) { // note the use of is_admin() to double check that this is h
 			'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
 			'proper_folder_name' => 'mmm-weather', // this is the name of the folder your plugin lives in
 			'api_url' => 'https://api.github.com/repos/DerekMarcinyshyn/MMM-Weather', // the github API url of your github repo
-			'raw_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/blob/master/', // the github raw url of your github repo
-			'github_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather.git', // the github url of your github repo
+			'raw_url' => 'https://raw.github.com/DerekMarcinyshyn/MMM-Weather/blob/master/', // the github raw url of your github repo
+			'github_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather', // the github url of your github repo
 			'zip_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/zipball/master', // the zip url of the github repo
 			'requires' => '3.0', // which version of WordPress does your plugin require?
 			'tested' => '3.3', // which version of WordPress is your plugin tested up to?
