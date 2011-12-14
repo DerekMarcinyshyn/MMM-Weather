@@ -36,10 +36,10 @@ class wp_github_updater {
 		$defaults = array(
 			'slug' => plugin_basename(__FILE__),
 			'proper_folder_name' => plugin_basename(__FILE__),
-			'api_url' => 'https://api.github.com/repos/DerekMarcinyshyn/MMM-Weather',
-			'raw_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/blob/master',
-			'github_url' => 'https://DerekMarcinyshyn@github.com/DerekMarcinyshyn/MMM-Weather.git',
-			'zip_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/zipball/master',
+			'api_url' => 'https://api.github.com/repos/jkudish/WordPress-GitHub-Plugin-Updater',
+			'raw_url' => 'https://raw.github.com/jkudish/WordPress-GitHub-Plugin-Updater/master',
+			'github_url' => 'https://github.com/jkudish/WordPress-GitHub-Plugin-Updater',
+			'zip_url' => 'https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/zipball/master',
 		  'requires' => $wp_version,
 	    'tested' => $wp_version,
 		);	
