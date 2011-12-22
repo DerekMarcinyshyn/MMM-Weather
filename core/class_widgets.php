@@ -67,7 +67,7 @@ if(!class_exists('MMM_Weather')) {
 			
 			//ouput weather to screen
 			$wx_html .= '<div id="mmm-date">' . $weather->dateTime[1]->textSummary . '</div>';
-			$wx_html .= '<div><img src="http://ds.monasheemountainmultimedia.com/wx/icons/ec/' . $weather->currentConditions->iconCode . '.png" class="mmm-weather-icon" />';
+			$wx_html .= '<div><img src="' . MMMW_ICON_URL . $weather->currentConditions->iconCode . '.png" class="mmm-weather-icon" />';
 			$wx_html .= '<div id="mmm-temperature">' . $weather->currentConditions->temperature . '&deg;C</div>';
 			$wx_html .= '<div id="mmm-sky">' . $weather->currentConditions->condition . '</div></div>';
 			$wx_html .= '<div id="mmm-more">Click for Forecast</div>';
@@ -78,10 +78,10 @@ if(!class_exists('MMM_Weather')) {
 			
 			// loop through forecasts
 			for ( $i = 0; $i < 3; $i++) {
-			$wx_html .= '<h3>' . $weather->forecastGroup->forecast[$i]->period . '</h3>';
-			$wx_html .= '<img src="http://ds.monasheemountainmultimedia.com/wx/icons/ec/' . $weather->forecastGroup->forecast[$i]->abbreviatedForecast->iconCode .
+				$wx_html .= '<h3>' . $weather->forecastGroup->forecast[$i]->period . '</h3>';
+				$wx_html .= '<img src="' . MMMW_ICON_URL . $weather->forecastGroup->forecast[$i]->abbreviatedForecast->iconCode .
 			'.png" class="mmm-forecast-icon" /><br />';
-			$wx_html .= '<p>' . $weather->forecastGroup->forecast[$i]->textSummary . '</p>';
+				$wx_html .= '<p>' . $weather->forecastGroup->forecast[$i]->textSummary . '</p>';
 			}
 		
 			$wx_html .= '</div><!-- mmm-forecast -->';

@@ -45,6 +45,9 @@ define( 'MMMW_PATH', WP_PLUGIN_DIR . '/' . MMMW_DIRECTORY );
 /** URL for front-end links */
 define( 'MMMW_URL', WP_PLUGIN_URL . '/' . MMMW_DIRECTORY );
 
+/** URL for icons */
+define( 'MMMW_ICON_URL', WP_PLUGIN_URL . '/' . MMMW_DIRECTORY . '/images/icons/');
+
 /** Load Core Functions */
 include_once MMMW_PATH . '/core/class_core.php';
 
