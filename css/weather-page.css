@@ -1,0 +1,104 @@
+/** 
+ * MMM Weather
+ * Weather Page CSS
+ */
+#mmm-weather-page-container {
+	width:100%;
+}
+#change-location {
+	float:right;
+	background-color: #EEE;
+}
+#change-location select {
+	padding:5px;
+	background:transparent;
+	width: 250px;
+	height: 34px;
+	border:1px solid #CCCCCC;
+	font-family: 'Open sans', sans-serif;
+	font-size: 14px;	
+}
+#mmm-weather-page-container #location {
+	font-weight:bold;
+}
+#mmm-weather-page-container #date {
+	font-size:12px;
+}
+#mmm-weather-page-container #date {
+	margin-bottom:0;
+}
+#mmm-weather-page-container #current-conditions {
+	width:250px;
+	float:left;
+}
+#mmm-weather-page-container #icon {
+	float:left;
+	width:120px;
+}
+#mmm-weather-page-container #temp-sky-container {
+	float:right;
+	width:100px;
+	margin-top:40px;
+}
+#mmm-weather-page-container #temperature {
+	font-size:40px;
+	font-weight:bold;
+	text-align:right;
+}
+#mmm-weather-page-container #sky {
+	text-align:right;
+	padding-top:5px;
+}
+#mmm-weather-page-container #current-data {
+	float:right;
+	width:200px;
+	font-size:14px;
+	line-height:150%!important;
+	margin-top:30px;
+}
+#mmm-weather-page-container #forecast {
+	margin-top:50px;
+	font-weight:bold;
+}
+#mmm-weather-page-container #forecast-period {
+	margin-top:20px;
+	width:98%;
+	height:180px;
+	border:1px solid #CCC;
+	text-decoration: none;
+	color: #666;
+	text-shadow: 0 1px 0 white;
+	-moz-text-shadow: 0 1px 0 #fff;
+	-webkit-text-shadow: 0 1px 0 #fff;
+	background: #E8E8E8;
+	background: -moz-linear-gradient( #F8F8F8, #E8E8E8 );
+	background: -webkit-gradient( linear, 0% 0%, 0% 100%, from(#F8F8F8), to(#E8E8E8) );
+	background: -webkit-linear-gradient( #F8F8F8, #E8E8E8 );
+	background: -o-linear-gradient( #F8F8F8, #E8E8E8 );
+	box-shadow: 0 2px 2px rgba(0,0,0,0.08);
+	-moz-box-shadow: 0 2px 2px rgba(0,0,0,0.08);
+	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.08);	
+}
+#mmm-weather-page-container #icon {
+	margin-left:20px;
+	margin-top:30px;
+}
+#mmm-weather-page-container #forecast-period #period {
+	margin-top:30px;
+	font-weight:bold;
+}
+#mmm-weather-page-container #forecast-period #text-summary {
+	width:90%;
+	font-size:13px;
+}
+#mmm-weather-page-loader {
+	background-image: url('../images/ajax-loader.gif');
+	background-repeat:no-repeat;
+	height: 55px;
+	width: 100%;
+}
+#mmm-weather-page-container img {
+	border:none;
+	padding:0;
+	margin:0;
+}
