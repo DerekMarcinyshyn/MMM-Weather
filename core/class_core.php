@@ -9,24 +9,19 @@
  * 
  */
 class MMMW_Core {
-	
 	/**
 	 * Highest-level function initialized on plugin load
 	 * 
 	 */
-	
 	function MMMW_Core() {
-		
 		/** Hook in upper init */
 		add_action( 'init', array($this, 'init_upper' ), 0);
 	}
-	
 	/**
 	 * Initialize plugin
 	 * 
 	 */
 	function init_upper() {
-
 		/** Initialize the widget */
 		add_action( 'widgets_init', create_function( '', 'register_widget("MMM_Weather");' ) );
 		
@@ -44,26 +39,52 @@ class MMMW_Core {
 		/** Add the AJAX actions for both logged in and not logged in */
 		add_action( 'wp_ajax_nopriv_mmmweather_submit', array( $this, 'mmmweather_submit' ) );
 		add_action( 'wp_ajax_mmmweather_submit', array( $this, 'mmmweather_submit' ) );
+
+		/** Admin page */
+		add_action( 'admin_menu', array( $this, 'mmm_weather_page_menu' ) );
 						
-		/** Run the Update if admin */
-		if ( is_admin() ) { 
-			$config = array(
-					'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
-					'proper_folder_name' => 'mmm-weather', // this is the name of the folder your plugin lives in
-					'api_url' => 'https://api.github.com/repos/DerekMarcinyshyn/MMM-Weather', // the github API url of your github repo
-					'raw_url' => 'https://raw.github.com/DerekMarcinyshyn/MMM-Weather/master/', // the github raw url of your github repo
-					'github_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather', // the github url of your github repo
-					'zip_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/zipball/master', // the zip url of the github repo
-					'requires' => '3.0', // which version of WordPress does your plugin require?
-					'tested' => '3.3', // which version of WordPress is your plugin tested up to?
-			);
-			new wp_github_updater( $config );
-		} 
-		
+		/** Run the Updater if admin */
+		add_action( 'admin_init', array( $this, 'mmm_weather_update' ) );
+	
 		/** Hook for workaround for WordPress getting SSL certificate at GitHub */
 		add_action('http_request_args', array($this, 'jkudish_http_request_args'), 10, 2 );
 	}
 	
+	function mmm_weather_update() {
+		$config = array(
+				'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
+				'proper_folder_name' => 'mmm-weather', // this is the name of the folder your plugin lives in
+				'api_url' => 'https://api.github.com/repos/DerekMarcinyshyn/MMM-Weather', // the github API url of your github repo
+				'raw_url' => 'https://raw.github.com/DerekMarcinyshyn/MMM-Weather/master/', // the github raw url of your github repo
+				'github_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather', // the github url of your github repo
+				'zip_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/zipball/master', // the zip url of the github repo
+				'requires' => '3.3', // which version of WordPress does your plugin require?
+				'tested' => '3.3', // which version of WordPress is your plugin tested up to?
+		);
+		new wp_github_updater( $config );
+	}
+	/**
+	 * MMM Weather Page submenu
+	 */
+	
+	function mmm_weather_page_menu() {
+		add_submenu_page( 'edit.php?post_type=page', 'MMM Weather', 'MMM Weather', 'manage_options', 'mmm-weather-admin', 'MMMW_Core::mmm_weather_admin' );
+	}
+	/**
+	 * MMM Weather Page Admin content
+	 */
+	function mmm_weather_admin() {
+		// check that the user has the required capability
+		if ( !current_user_can( 'manage_options' ) ) {
+			wp_die( __('You do not have sufficient permissions to access this page.' ) );
+		}
+		
+		echo '<div class="wrap">';
+		echo "<h2>" . __( 'MMM Weather', 'mmm-weather-admin' ) . "</h2>";
+		echo "<p>" . __( 'MMM Weather uses an XML API Feed from Environment Canada. For more information: <a href="http://dd.weatheroffice.gc.ca/about_dd_apropos.txt">About MSC HTTP Data Server</a>', 'mmm-weather-admin' ) . "</p>";
+		echo "<p>" . __( 'Use') . "<code>[mmm-weather]</code>" . __( 'shortcode anywhere in your page.' ) . "</p>";
+		echo "<p>" . __( 'Widget is currently hard coded to Revelstoke Weather. Future upgrade will have ability to set any Environment Canada city.' ) . "</p" ;
+	}
 	/**
 	 * MMM Weather Page from shorcode [mmm-weather]
 	 * @param the shortcode name $atts
@@ -80,8 +101,7 @@ class MMMW_Core {
 		wp_enqueue_style( 'mmm-weather-page-style');
 		
 		/** HTML Output */
-		$html = '<div id="mmm-weather-page-loader"></div>
-			<div id="change-location">
+		$html = '<div id="change-location">
 				<form>
 					<select id="wx-location">
 						<option value="">Change Mountain Towns</option>
@@ -97,7 +117,8 @@ class MMMW_Core {
 					</select> 
 				</form>	
 			</div>
-			<div id="mmm-weather-page-container"></div>';
+			<div id="mmm-weather-page-container"></div>
+			<div id="mmm-weather-page-loader"></div>';
 		return $html;
 	}
 	
@@ -208,7 +229,6 @@ class MMMW_Core {
 						
 		return $wxhtml;
 	}
-				
 	/**
 	 *  Current workaround for WordPress getting SSL certificate at GitHub
 	 *  @param array $args
