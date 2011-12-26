@@ -94,7 +94,7 @@
 #mmm-weather-page-loader {
 	background-image: url('../images/ajax-loader.gif');
 	background-repeat:no-repeat;
-	height: 55px;
+	height: 32px;
 	width: 100%;
 }
 #mmm-weather-page-container img {
