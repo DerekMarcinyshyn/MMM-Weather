@@ -15,7 +15,7 @@ class MMMW_Core {
 	 */
 	function MMMW_Core() {
 		/** Hook in upper init */
-		add_action( 'init', array($this, 'init_upper' ), 0);
+		add_action( 'init', array( &$this, 'init_upper' ), 0 );
 	}
 	/**
 	 * Initialize plugin
@@ -26,7 +26,7 @@ class MMMW_Core {
 		add_action( 'widgets_init', create_function( '', 'register_widget("MMM_Weather");' ) );
 		
 		/** Load widget js file */
-		wp_register_script( 'mmm-weather-widget-jscript', MMMW_URL . '/js/scripts.js', array('jquery'), MMMW_VERSION, true );
+		wp_register_script( 'mmm-weather-widget-jscript', MMMW_URL . '/js/scripts.js', array( 'jquery' ), MMMW_VERSION, true );
 		wp_enqueue_script( 'mmm-weather-widget-jscript');
 						
 		/** Load widget css file */
@@ -34,39 +34,24 @@ class MMMW_Core {
 		wp_enqueue_style( 'mmm-weather-widget-style');
 
 		/** Initialize the shortcode */
-		add_shortcode( 'mmm-weather', array( $this, 'shortcode_mmm_weather' ) );
+		add_shortcode( 'mmm-weather', array( &$this, 'shortcode_mmm_weather' ) );
 		
 		/** Add the AJAX actions for both logged in and not logged in */
-		add_action( 'wp_ajax_nopriv_mmmweather_submit', array( $this, 'mmmweather_submit' ) );
-		add_action( 'wp_ajax_mmmweather_submit', array( $this, 'mmmweather_submit' ) );
+		add_action( 'wp_ajax_nopriv_mmmweather_submit', array( &$this, 'mmmweather_submit' ) );
+		add_action( 'wp_ajax_mmmweather_submit', array( &$this, 'mmmweather_submit' ) );
 
 		/** Admin page */
-		add_action( 'admin_menu', array( $this, 'mmm_weather_page_menu' ) );
+		add_action( 'admin_menu', array( &$this, 'mmm_weather_page_menu' ) );
 						
 		/** Run the Updater if admin */
-		add_action( 'admin_init', array( $this, 'mmm_weather_update' ) );
-	
+		add_action( 'admin_init', create_function( '', 'new WP_Github_Updater;' ) );
+				
 		/** Hook for workaround for WordPress getting SSL certificate at GitHub */
-		add_action('http_request_args', array($this, 'jkudish_http_request_args'), 10, 2 );
-	}
-	
-	function mmm_weather_update() {
-		$config = array(
-				'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
-				'proper_folder_name' => 'mmm-weather', // this is the name of the folder your plugin lives in
-				'api_url' => 'https://api.github.com/repos/DerekMarcinyshyn/MMM-Weather', // the github API url of your github repo
-				'raw_url' => 'https://raw.github.com/DerekMarcinyshyn/MMM-Weather/master/', // the github raw url of your github repo
-				'github_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather', // the github url of your github repo
-				'zip_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/zipball/master', // the zip url of the github repo
-				'requires' => '3.3', // which version of WordPress does your plugin require?
-				'tested' => '3.3', // which version of WordPress is your plugin tested up to?
-		);
-		new wp_github_updater( $config );
+		add_action('http_request_args', array( &$this, 'jkudish_http_request_args'), 10, 2 );
 	}
 	/**
 	 * MMM Weather Page submenu
 	 */
-	
 	function mmm_weather_page_menu() {
 		add_submenu_page( 'edit.php?post_type=page', 'MMM Weather', 'MMM Weather', 'manage_options', 'mmm-weather-admin', 'MMMW_Core::mmm_weather_admin' );
 	}
@@ -121,7 +106,6 @@ class MMMW_Core {
 			<div id="mmm-weather-page-loader"></div>';
 		return $html;
 	}
-	
 	/**
 	 * jQuery AJAX Function
 	 * returns new location weather html
@@ -166,13 +150,12 @@ class MMMW_Core {
 				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000141_e.xml' );
 				break;
 		}
-				
+
 		// send display response back to jQuery
 		header( "Content-Type: application/json" );
 		echo json_encode( $resp );
 		exit;
 	}
-	
 	/**
 	 * Output the Weather Forecast
 	 * @param location url $xml

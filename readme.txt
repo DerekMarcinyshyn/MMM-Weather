@@ -1,11 +1,10 @@
-=== Plugin Name ===
+=== MMM Weather ===
 Contributors: monashee
-Donate link: http://monasheemountainmultimedia.com/
+Donate link: http://monasheemountainmultimedia.com
 Tags: weather, environment canada
 Requires at least: 3.3
 Tested up to: 3.3
 Stable tag: 2.0.0
-
 ~Current Version:2.0.0~
 
 A custom sidebar weather widget for Revelstoke, BC. 
@@ -39,7 +38,6 @@ Code cleanup.
 = 1.0.0 =
 Initial release.
 
-
 == Upgrade Notice ==
 
 = 1.0.1 =
@@ -47,4 +45,3 @@ Added GitHub WordPress Updater
 
 = 1.0.0 =
 Initial build
-
