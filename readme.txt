@@ -4,8 +4,8 @@ Donate link: http://monasheemountainmultimedia.com
 Tags: weather, environment canada
 Requires at least: 3.3
 Tested up to: 3.3
-Stable tag: 2.0.0
-~Current Version:2.0.0~
+Stable tag: 2.0.1
+~Current Version:2.0.1~
 
 A custom sidebar weather widget for Revelstoke, BC. 
 
@@ -27,6 +27,11 @@ A custom sidebar weather widget for Revelstoke, BC that reads from the Environme
 Coming soon.
 
 == Changelog ==
+
+= 2.0.1 =
+Update updater class to 1.0.3
+Update some css
+Update widget jquery to slideToggle() instead of slide()
 
 = 2.0.0 =
 Update plugin to include shortcode for page view.
