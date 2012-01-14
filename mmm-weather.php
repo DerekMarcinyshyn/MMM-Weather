@@ -29,7 +29,7 @@ defined( 'ABSPATH' ) or die( "Cannot access pages directly." );
 defined( "DS" ) or define( "DS", DIRECTORY_SEPARATOR );
 
 /** This Version */
-define( 'MMMW_VERSION', '2.0.0');
+define( 'MMMW_VERSION', '2.0.1');
 
 /** Get Directory */
 define( 'MMMW_DIRECTORY', dirname( plugin_basename( __FILE__ ) ) );
