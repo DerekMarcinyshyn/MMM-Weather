@@ -45,9 +45,6 @@ class MMMW_Core {
 						
 		/** Run the Updater if admin */
 		add_action( 'admin_init', create_function( '', 'new WP_Github_Updater;' ) );
-				
-		/** Hook for workaround for WordPress getting SSL certificate at GitHub */
-		add_action('http_request_args', array( &$this, 'jkudish_http_request_args'), 10, 2 );
 	}
 	/**
 	 * MMM Weather Page submenu
@@ -211,15 +208,6 @@ class MMMW_Core {
 		} // end if file exists 
 						
 		return $wxhtml;
-	}
-	/**
-	 *  Current workaround for WordPress getting SSL certificate at GitHub
-	 *  @param array $args
-	 *  @param url $url
-	 */
-	function jkudish_http_request_args( $args, $url ) {
-		$args['sslverify'] = false;
-		return $args;
 	}
 }
 ?>

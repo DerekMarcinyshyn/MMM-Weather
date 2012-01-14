@@ -4,7 +4,7 @@
 */
 jQuery( document ).ready( function() {
 	jQuery( "#mmm-more" ).click( function() {
-		jQuery( "#mmm-forecast" ).toggle( 'slow' );
+		jQuery( "#mmm-forecast" ).slideToggle( 'slow' );
 	});
 });
 
