@@ -4,7 +4,7 @@ Plugin Name: MMM Weather
 Plugin URI: http://monasheemountainmultimedia.com
 Description: Weather live feed from Environment Canada that displays in a page or as a widget.
 Author: Derek Marcinyshyn
-Version: 2.0.0
+Version: 2.0.1
 Author URI: http://monasheemountainmultimedia.com
 Network: true
 
