@@ -169,8 +169,10 @@ class MMMW_Core {
 		
 			$wxhtml .= '<div id="location">' . $ajax_weather->currentConditions->station . '</div>';
 			$wxhtml .= '<div id="date">' . $ajax_weather->dateTime[1]->textSummary . '</div>';
+			$wxhtml .= '<div id="current-conditions-container">';
 			$wxhtml .= '<div id="current-conditions">';
-			// check to see if icon code is available
+			
+			/* check to see if icon code is available */
 			if ( !empty( $ajax_weather->currentConditions->iconCode ) ) {
 				$wxhtml .= '<div id="icon"><img src="' . MMMW_ICON_URL . $ajax_weather->currentConditions->iconCode . '.png" width="120" /></div>';
 			} else {
@@ -188,7 +190,7 @@ class MMMW_Core {
 			$wxhtml .= 'Barometer <strong>' . $ajax_weather->currentConditions->pressure . 'kPa</strong><br />';
 			$wxhtml .= 'Relative Humidity <strong>' . $ajax_weather->currentConditions->relativeHumidity . '%</strong><br />';
 			$wxhtml .= 'Visibility <strong>' . $ajax_weather->currentConditions->visibility . '</strong>km';
-			$wxhtml .= '</div>';
+			$wxhtml .= '</div></div><!-- current-conditions-container -->';
 			$wxhtml .= '<div class="clear"></div>';
 			$wxhtml .= '<div id="forecast">Extended Forecast</div>';
 		

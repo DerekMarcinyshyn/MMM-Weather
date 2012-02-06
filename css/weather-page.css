@@ -56,7 +56,7 @@
 	margin-top:30px;
 }
 #mmm-weather-page-container #forecast {
-	margin-top:50px;
+	margin-top:20px;
 	font-weight:bold;
 }
 #mmm-weather-page-container #forecast-period {
@@ -65,18 +65,6 @@
 	height:180px;
 	border:1px solid #CCC;
 	text-decoration: none;
-	color: #666;
-	text-shadow: 0 1px 0 white;
-	-moz-text-shadow: 0 1px 0 #fff;
-	-webkit-text-shadow: 0 1px 0 #fff;
-	background: #E8E8E8;
-	background: -moz-linear-gradient( #F8F8F8, #E8E8E8 );
-	background: -webkit-gradient( linear, 0% 0%, 0% 100%, from(#F8F8F8), to(#E8E8E8) );
-	background: -webkit-linear-gradient( #F8F8F8, #E8E8E8 );
-	background: -o-linear-gradient( #F8F8F8, #E8E8E8 );
-	box-shadow: 0 2px 2px rgba(0,0,0,0.08);
-	-moz-box-shadow: 0 2px 2px rgba(0,0,0,0.08);
-	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.08);	
 }
 #mmm-weather-page-container #icon {
 	margin-left:20px;
@@ -100,4 +88,7 @@
 	border:none;
 	padding:0;
 	margin:0;
+}
+#current-conditions-container {
+	height:160px;
 }
