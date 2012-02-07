@@ -47,7 +47,7 @@ class MMMW_Core {
 		add_action( 'admin_init', create_function( '', 'new WP_Github_Updater;' ) );
 		
 		/* SSL Verify workaround */
-		add_action( 'http_request_args', 'mmm_ssl_workaround', 10, 2 );
+		add_action( 'http_request_args', array( &$this, 'mmm_ssl_workaround' ), 10, 2 );
 	}
 	/**
 	 * MMM SSL Verify workaround for GitHub / WordPress
