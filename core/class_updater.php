@@ -86,7 +86,7 @@ class WP_Github_Updater {
 		
 		if ( !isset($version) || !$version || $version == '' ) {
 
-			$raw_response = wp_remote_get( $this->config['raw_url'].'/readme.txt' );
+			$raw_response = wp_remote_get( $this->config['raw_url'].'/readme.txt', $this->config['sslverify'] );
 						
 			if ( is_wp_error($raw_response ) )
 				return false;
