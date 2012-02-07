@@ -45,6 +45,19 @@ class MMMW_Core {
 						
 		/* Run the Updater if admin */
 		add_action( 'admin_init', create_function( '', 'new WP_Github_Updater;' ) );
+		
+		/* SSL Verify workaround */
+		add_action( 'http_request_args', 'mmm_ssl_workaround', 10, 2 );
+	}
+	/**
+	 * MMM SSL Verify workaround for GitHub / WordPress
+	 * @param $args array sslverify => false
+	 * @param $url
+	 * @return $args
+	 */
+	function mmm_ssl_workaround( $args, $url ) {
+		$args['sslverify'] = false;
+		return $args;
 	}
 	/**
 	 * MMM Weather Page submenu
