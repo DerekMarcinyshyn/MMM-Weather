@@ -3,9 +3,9 @@ Contributors: monashee
 Donate link: http://monasheemountainmultimedia.com
 Tags: weather, environment canada
 Requires at least: 3.3
-Tested up to: 3.3
-Stable tag: 2.0.1
-~Current Version:2.0.1~
+Tested up to: 3.4
+Stable tag: 2.1.0
+~Current Version:2.1.0~
 
 A custom sidebar weather widget for Revelstoke, BC. 
 
@@ -28,6 +28,11 @@ Coming soon.
 
 == Changelog ==
 
+= 2.1.0 =
+Various css fixes and clean up
+Add and organize forecast cities
+Add infrared, jet stream, 48 hour fronts, 7 day forecast tabs
+
 = 2.0.1 =
 Update updater class to 1.0.3
 Update some css
@@ -47,6 +52,7 @@ Initial release.
 
 = 1.0.1 =
 Added GitHub WordPress Updater
+Should self update when wp-cron is run
 
 = 1.0.0 =
 Initial build

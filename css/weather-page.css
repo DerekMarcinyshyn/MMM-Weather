@@ -40,13 +40,12 @@
 	margin-top:40px;
 }
 #mmm-weather-page-container #temperature {
-	font-size:40px;
+	font-size:28px;
 	font-weight:bold;
 	text-align:right;
 }
 #mmm-weather-page-container #sky {
 	text-align:right;
-	padding-top:5px;
 }
 #mmm-weather-page-container #current-data {
 	float:right;
@@ -91,4 +90,7 @@
 }
 #current-conditions-container {
 	height:160px;
+}
+#fronts a:hover, #seven a:hover {
+	opacity:0.6;
 }
