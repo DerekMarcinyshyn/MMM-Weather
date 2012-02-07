@@ -39,7 +39,7 @@ class WP_Github_Updater {
 				'raw_url' => 'https://raw.github.com/DerekMarcinyshyn/MMM-Weather/master/', // the github raw url of your github repo
 				'github_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather', // the github url of your github repo
 				'zip_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/zipball/master', // the zip url of the github repo
-				'sslverify' => true,
+				'sslverify' => false,
 				'requires' => '3.3', // which version of WordPress does your plugin require?
 				'tested' => '3.3', // which version of WordPress is your plugin tested up to?
 		);	
