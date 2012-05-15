@@ -5,6 +5,7 @@
  * @author Derek Marcinyshyn
  * @package MMM Weather
  * @subpackage Widget
+ * @version 2.2.0
  * 
  */
 if(!class_exists('MMM_Weather')) {
@@ -16,7 +17,7 @@ if(!class_exists('MMM_Weather')) {
 		 *
 		 * Registers the widget details with the parent class
 		 */
-		function MMM_Weather()
+		public function MMM_Weather()
 		{
 			// widget actual processes
 			parent::WP_Widget( $id = 'mmm_weather', $name = get_class($this), $options = array( 'description' => 'MMM Weather' ) );
@@ -64,7 +65,7 @@ if(!class_exists('MMM_Weather')) {
 			/* ouput weather to screen */
 			$wx_html .= '<div id="mmm-date">' . $weather->dateTime[1]->textSummary . '</div>';
 			if ( $weather->currentConditions->iconCode ) {
-				$wx_html .= '<div><img src="' . MMMW_ICON_URL . $weather->currentConditions->iconCode . '.png" class="mmm-weather-icon" />';
+				$wx_html .= '<div><img src="' . MMM_WX_ICON_URL . $weather->currentConditions->iconCode . '.png" class="mmm-weather-icon" />';
 			}
 			$wx_html .= '<div id="mmm-temperature">' . $weather->currentConditions->temperature . '&deg;C</div>';
 			$wx_html .= '<div id="mmm-sky">' . $weather->currentConditions->condition . '</div></div>';
@@ -76,7 +77,7 @@ if(!class_exists('MMM_Weather')) {
 				$wx_html .= '<h3 class="widget-title">' . $weather->forecastGroup->forecast[$i]->period . '</h3>';
 				
 				if ( $weather->forecastGroup->forecast[$i]->abbreviatedForecast->iconCode ) {
-					$wx_html .= '<img src="' . MMMW_ICON_URL . $weather->forecastGroup->forecast[$i]->abbreviatedForecast->iconCode .
+					$wx_html .= '<img src="' . MMM_WX_ICON_URL . $weather->forecastGroup->forecast[$i]->abbreviatedForecast->iconCode .
 					'.png" class="mmm-forecast-icon" /><br />';
 				}
 				

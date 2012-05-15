@@ -2,18 +2,18 @@
 /**
  * MMM Weather Core Class
  * 
- * @version 2.0.2
+ * @version 2.2.0
  * @author Derek Marcinyshyn
  * @package MMM Weather
  * @subpackage Core
  * 
  */
-class MMMW_Core {
+class MMM_WX_Core {
 	/**
 	 * Highest-level function initialized on plugin load
 	 * 
 	 */
-	function MMMW_Core() {
+	function MMM_WX_Core() {
 		/* Hook in upper init */
 		add_action( 'init', array( &$this, 'init_upper' ), 0 );
 	}
@@ -26,11 +26,11 @@ class MMMW_Core {
 		add_action( 'widgets_init', create_function( '', 'register_widget("MMM_Weather");' ) );
 		
 		/* Load widget js file */
-		wp_register_script( 'mmm-weather-widget-jscript', MMMW_URL . '/js/scripts.js', array( 'jquery' ), MMMW_VERSION, true );
+		wp_register_script( 'mmm-weather-widget-jscript', MMM_WX_URL . '/js/scripts.js', array( 'jquery' ), MMM_WX_VERSION, true );
 		wp_enqueue_script( 'mmm-weather-widget-jscript');
 						
 		/* Load widget css file */
-		wp_register_style( 'mmm-weather-widget-style', MMMW_URL . '/css/style.css', false, MMMW_VERSION );
+		wp_register_style( 'mmm-weather-widget-style', MMM_WX_URL . '/css/style.css', false, MMM_WX_VERSION );
 		wp_enqueue_style( 'mmm-weather-widget-style');
 
 		/* Initialize the shortcode */
@@ -44,26 +44,35 @@ class MMMW_Core {
 		add_action( 'admin_menu', array( &$this, 'mmm_weather_page_menu' ) );
 						
 		/* Run the Updater if admin */
-		add_action( 'admin_init', create_function( '', 'new WP_Github_Updater;' ) );
-		
-		/* SSL Verify workaround */
-		add_action( 'http_request_args', array( &$this, 'mmm_ssl_workaround' ), 10, 2 );
+		add_action( 'admin_init', array( &$this, 'mmm_wx_github_updater' ) );
 	}
 	/**
-	 * MMM SSL Verify workaround for GitHub / WordPress
-	 * @param $args array sslverify => false
-	 * @param $url
-	 * @return $args
+	 * GitHub Updater
+	 * 
 	 */
-	function mmm_ssl_workaround( $args, $url ) {
-		$args['sslverify'] = false;
-		return $args;
+	function mmm_wx_github_updater() {
+		define( 'WP_GITHUB_FORCE_UPDATE', true );
+		
+		$config = array(
+					'slug' => plugin_basename(__FILE__),
+					'proper_folder_name' => 'mmm-weather',
+					'api_url' => 'https://api.github.com/repos/DerekMarcinyshyn/MMM-Weather',
+					'raw_url' => 'https://raw.github.com/DerekMarcinyshyn/MMM-Weather/master',
+					'github_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather',
+					'zip_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/zipball/master',
+					'sslverify' => true,
+					'requires' => '3.0',
+					'tested' => '3.3',
+					'readme' => 'readme.txt'
+				);
+		
+		new WPGitHubUpdater( $config );
 	}
 	/**
 	 * MMM Weather Page submenu
 	 */
 	function mmm_weather_page_menu() {
-		add_submenu_page( 'edit.php?post_type=page', 'MMM Weather', 'MMM Weather', 'manage_options', 'mmm-weather-admin', 'MMMW_Core::mmm_weather_admin' );
+		add_submenu_page( 'edit.php?post_type=page', 'MMM Weather', 'MMM Weather', 'manage_options', 'mmm-weather-admin', 'MMM_WX_Core::mmm_weather_admin' );
 	}
 	/**
 	 * MMM Weather Page Admin content
@@ -87,31 +96,31 @@ class MMMW_Core {
 	 */
 	function shortcode_mmm_weather( $atts, $content=null ) {
 		/* Load page js files */
-		wp_register_script( 'mmm-weather-page-jscript', MMMW_URL . '/js/weather-page.js', array('jquery'), MMMW_VERSION, true );
-		wp_enqueue_script( 'mmm-weather-page-jscript');
+		wp_register_script( 'mmm-weather-page-jscript', MMM_WX_URL . '/js/weather-page.js', array('jquery'), MMM_WX_VERSION, true );
+		wp_enqueue_script( 'mmm-weather-page-jscript' );
 		
 		wp_localize_script( 'mmm-weather-page-jscript', 'MMMWeather', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 		
-		wp_register_script( 'mmm-weather-page-jquery-ui', MMMW_URL . '/js/jquery-ui-1.8.17.custom.min.js', array('jquery'), MMMW_VERSION, true );
-		wp_enqueue_script( 'mmm-weather-page-jquery-ui');
+		wp_register_script( 'mmm-weather-page-jquery-ui', MMM_WX_URL . '/js/jquery-ui-1.8.17.custom.min.js', array('jquery'), MMM_WX_VERSION, true );
+		wp_enqueue_script( 'mmm-weather-page-jquery-ui' );
 		
-		wp_register_script( 'mmm-weather-page-fancybox', MMMW_URL . '/js/fancybox/jquery.fancybox-1.3.4.pack.js', array('jquery'), MMMW_VERSION, true );
-		wp_enqueue_script( 'mmm-weather-page-fancybox');
+		wp_register_script( 'mmm-weather-page-fancybox', MMM_WX_URL . '/js/fancybox/jquery.fancybox-1.3.4.pack.js', array('jquery'), MMM_WX_VERSION, true );
+		wp_enqueue_script( 'mmm-weather-page-fancybox' );
 		
-		wp_register_script( 'mmm-weather-page-fancybox-mousewheel', MMMW_URL . '/js/fancybox/jquery.mousewheel-3.0.4.pack.js', array('jquery'), MMMW_VERSION, true );
-		wp_enqueue_script( 'mmm-weather-page-fancybox-mousewheel');
-		
+		wp_register_script( 'mmm-weather-page-fancybox-mousewheel', MMM_WX_URL . '/js/fancybox/jquery.mousewheel-3.0.4.pack.js', array('jquery'), MMM_WX_VERSION, true );
+		wp_enqueue_script( 'mmm-weather-page-fancybox-mousewheel' );
+					
 		/* Load page css files */
-		wp_register_style( 'mmm-weather-page-style', MMMW_URL . '/css/weather-page.css', false, MMMW_VERSION );
-		wp_enqueue_style( 'mmm-weather-page-style');
+		wp_register_style( 'mmm-weather-page-style', MMM_WX_URL . '/css/weather-page.css', false, MMM_WX_VERSION );
+		wp_enqueue_style( 'mmm-weather-page-style' );
 		
-		wp_register_style( 'mmm-weather-jquery-ui-style', MMMW_URL . '/css/smoothness/jquery-ui-1.8.17.custom.css', false, MMMW_VERSION );
-		wp_enqueue_style( 'mmm-weather-jquery-ui-style');
+		wp_register_style( 'mmm-weather-jquery-ui-style', MMM_WX_URL . '/css/smoothness/jquery-ui-1.8.17.custom.css', false, MMM_WX_VERSION );
+		wp_enqueue_style( 'mmm-weather-jquery-ui-style' );
 		
-		wp_register_style( 'mmm-weather-fancybox-style', MMMW_URL . '/js/fancybox/jquery.fancybox-1.3.4.css', false, MMMW_VERSION );
-		wp_enqueue_style( 'mmm-weather-fancybox-style');
-		
+		wp_register_style( 'mmm-weather-fancybox-style', MMM_WX_URL . '/js/fancybox/jquery.fancybox-1.3.4.css', false, MMM_WX_VERSION );
+		wp_enqueue_style( 'mmm-weather-fancybox-style' );
 		/* HTML Output */
+		
 		$html ='<div id="weather-tabs">
 					<ul>
 						<li><a href="#city-forecasts">Forecasts</a></li>
@@ -169,11 +178,11 @@ class MMMW_Core {
 					</div><!-- #jet -->
 					
 					<div id="fronts">
-						<a id="fb-fronts" href="http://www.atmos.washington.edu/~ovens/loops/wxloop.cgi?fronts_ir+/48h/">Click to open 48 Hour Fronts from University of Washington<br /><img src="'.MMMW_URL.'/images/fronts.jpg" alt="Click to open animated west coast fronts" title="Click to open animated west coast fronts" /></a>
+						<a id="fb-fronts" href="http://www.atmos.washington.edu/~ovens/loops/wxloop.cgi?fronts_ir+/48h/">Click to open 48 Hour Fronts from University of Washington<br /><img src="'.MMM_WX_URL.'/images/fronts.jpg" alt="Click to open animated west coast fronts" title="Click to open animated west coast fronts" /></a>
 					</div><!-- #fronts -->
 					
 					<div id="seven">
-						<a id="fb-seven" href="http://www.atmos.washington.edu/~ovens/loops/wxloop.cgi?gfs_pcpn_slp_thkn+///6">Click to open 7 Day Forecast from University of Washington<br /><img src="'.MMMW_URL.'/images/seven.jpg" alt="Click to open animated west coast fronts" title="Click to open 7 Day Forecast" /></a>
+						<a id="fb-seven" href="http://www.atmos.washington.edu/~ovens/loops/wxloop.cgi?gfs_pcpn_slp_thkn+///6">Click to open 7 Day Forecast from University of Washington<br /><img src="'.MMM_WX_URL.'/images/seven.jpg" alt="Click to open animated west coast fronts" title="Click to open 7 Day Forecast" /></a>
 					</div><!-- #seven -->
 						
 				</div><!-- #weather-tabs -->	
@@ -188,84 +197,85 @@ class MMMW_Core {
 	function mmmweather_submit() {
 				
 		// switch depending on selection
+	
 		switch ($_POST['location']) {
 			case 'golden' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000527_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000527_e.xml' );
 				break;
-		
+				
 			case 'revelstoke' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000679_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000679_e.xml' );
 				break;
-		
+	
 			case 'nelson' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000258_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000258_e.xml' );
 				break;
-		
+	
 			case 'banff' :
-				$resp['display'] = MMMW_Core::display_weather( 'AB/s0000404_e.xml' );
+				$resp['display'] = self::display_weather( 'AB/s0000404_e.xml' );
 				break;
-		
+	
 			case 'canmore' :
-				$resp['display'] = MMMW_Core::display_weather( 'AB/s0000403_e.xml' );
+				$resp['display'] = self::display_weather( 'AB/s0000403_e.xml' );
 				break;
-		
+	
 			case 'calgary' :
-				$resp['display'] = MMMW_Core::display_weather( 'AB/s0000126_e.xml' );
+				$resp['display'] = self::display_weather( 'AB/s0000126_e.xml' );
 				break;
-		
+	
 			case 'whistler' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000078_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000078_e.xml' );
 				break;
 		
 			case 'squamish' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000323_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000323_e.xml' );
 				break;
-		
+	
 			case 'vancouver' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000141_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000141_e.xml' );
 				break;
 				
 			case 'salmon-arm' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000324_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000324_e.xml' );
 				break;
 				
 			case 'vernon' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000216_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000216_e.xml' );
 				break;
-			
+		
 			case 'kelowna' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000592_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000592_e.xml' );
 				break;
 				
 			case 'penticton' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000772_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000772_e.xml' );
 				break;
 				
 			case 'kamloops' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000568_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000568_e.xml' );
 				break;
 				
 			case 'sparwood' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000175_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000175_e.xml' );
 				break;		
 
 			case 'tofino' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000481_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000481_e.xml' );
 				break;
 				
 			case 'campbell-river' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000488_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000488_e.xml' );
 				break;
 				
 			case 'nanaimo' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000496_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000496_e.xml' );
 				break;
 			
 			case 'victoria' :
-				$resp['display'] = MMMW_Core::display_weather( 'BC/s0000775_e.xml' );
+				$resp['display'] = self::display_weather( 'BC/s0000775_e.xml' );
 				break;
 		}
-
+				
 		/* send display response back to jQuery */
 		header( "Content-Type: application/json" );
 		echo json_encode( $resp );
@@ -292,9 +302,9 @@ class MMMW_Core {
 			
 			/* check to see if icon code is available */
 			if ( !empty( $ajax_weather->currentConditions->iconCode ) ) {
-				$wxhtml .= '<div id="icon"><img src="' . MMMW_ICON_URL . $ajax_weather->currentConditions->iconCode . '.png" width="120" /></div>';
+				$wxhtml .= '<div id="icon"><img src="' . MMM_WX_ICON_URL . $ajax_weather->currentConditions->iconCode . '.png" width="120" /></div>';
 			} else {
-				$wxhtml .= '<div id="icon"><img src="' . MMMW_ICON_URL . '29.png" width="120" /></div>';
+				$wxhtml .= '<div id="icon"><img src="' . MMM_WX_ICON_URL . '29.png" width="120" /></div>';
 			}
 			$wxhtml .= '<div id="temp-sky-container">';
 			$wxhtml .= '<div id="temperature">' . $ajax_weather->currentConditions->temperature . '&deg;C</div>';
@@ -319,7 +329,7 @@ class MMMW_Core {
 			for ( $i = 0; $i < $forecastCount; $i++ ) {
 				$wxhtml .= '<div id="forecast-period">';
 				$wxhtml .= '<div id="icon">';
-				$wxhtml .= '<img src="' . MMMW_ICON_URL . $ajax_weather->forecastGroup->forecast[$i]->abbreviatedForecast->iconCode .'.png" />';
+				$wxhtml .= '<img src="' . MMM_WX_ICON_URL . $ajax_weather->forecastGroup->forecast[$i]->abbreviatedForecast->iconCode .'.png" />';
 				$wxhtml .= '</div>';
 				$wxhtml .= '<div id="period">' . $ajax_weather->forecastGroup->forecast[$i]->period . '</div>';
 				$wxhtml .= '<div id="text-summary">' . $ajax_weather->forecastGroup->forecast[$i]->textSummary . '</div>';
@@ -329,5 +339,4 @@ class MMMW_Core {
 						
 		return $wxhtml;
 	}
-}
-?>
+} // end class
