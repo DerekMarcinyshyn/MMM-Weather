@@ -2,7 +2,7 @@
 /**
  * MMM Weather Core Class
  * 
- * @version 2.3
+ * @version 2.4
  * @author Derek Marcinyshyn
  * @package MMM Weather
  * @subpackage Core
