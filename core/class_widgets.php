@@ -5,7 +5,7 @@
  * @author Derek Marcinyshyn
  * @package MMM Weather
  * @subpackage Widget
- * @version 2.2.0
+ * @version 2.3
  * 
  */
 if(!class_exists('MMM_Weather')) {

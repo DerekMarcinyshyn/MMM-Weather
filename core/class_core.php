@@ -2,7 +2,7 @@
 /**
  * MMM Weather Core Class
  * 
- * @version 2.2.0
+ * @version 2.3
  * @author Derek Marcinyshyn
  * @package MMM Weather
  * @subpackage Core
@@ -54,16 +54,16 @@ class MMM_WX_Core {
 		define( 'WP_GITHUB_FORCE_UPDATE', true );
 		
 		$config = array(
-					'slug' => plugin_basename(__FILE__),
-					'proper_folder_name' => 'mmm-weather',
-					'api_url' => 'https://api.github.com/repos/DerekMarcinyshyn/MMM-Weather',
-					'raw_url' => 'https://raw.github.com/DerekMarcinyshyn/MMM-Weather/master',
-					'github_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather',
-					'zip_url' => 'https://github.com/DerekMarcinyshyn/MMM-Weather/zipball/master',
-					'sslverify' => true,
-					'requires' => '3.0',
-					'tested' => '3.3',
-					'readme' => 'readme.txt'
+					'slug' 					=> plugin_basename(__FILE__),
+					'proper_folder_name' 	=> 'mmm-weather',
+					'api_url' 				=> 'https://api.github.com/repos/DerekMarcinyshyn/MMM-Weather',
+					'raw_url' 				=> 'https://raw.github.com/DerekMarcinyshyn/MMM-Weather/master',
+					'github_url' 			=> 'https://github.com/DerekMarcinyshyn/MMM-Weather',
+					'zip_url' 				=> 'https://github.com/DerekMarcinyshyn/MMM-Weather/zipball/master',
+					'sslverify' 			=> true,
+					'requires' 				=> '3.0',
+					'tested' 				=> '3.3',
+					'readme' 				=> 'readme.txt'
 				);
 		
 		new WPGitHubUpdater( $config );
